@@ -55,9 +55,9 @@ bool App::Init(const char *title, int width, int height) {
         return false;
     }
 
+    init_complete_ = true;
+
     return true;
-
-
 }
 void App::error_callback(int error, const char *description) {
     //TODO: 错误记录到日志
@@ -85,4 +85,7 @@ void App::Run() {
 }
 void App::Update() {
 
+}
+int App::init_complete() const {
+    return init_complete_;
 }

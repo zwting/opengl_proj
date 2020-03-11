@@ -7,15 +7,15 @@
 
 template <class T>
 class Singleton {
- private:
+ protected:
   static T *instance_;
- private:
-  Singleton(Singleton const&);
-  Singleton& operator=(Singleton const&);
+  Singleton() = default;
+  Singleton(Singleton const&) = delete;
+  Singleton& operator=(Singleton const&) = delete;
  public:
-  static T *Instance() {
+  static T *instance() {
       if(instance_ == nullptr){
-          instance_ = new T();
+          instance_ = new T;
       }
       return instance_;
   }
@@ -23,5 +23,10 @@ class Singleton {
 };
 template <class T> T* Singleton<T>::instance_ = nullptr;
 
-#define SINGLETON(T) typedef Singleton<T> T##Instance;
+//#define SINGLETON(T) typedef Singleton<T> T##Instance;
+//声明单例
+#define SINGLETON(T)    \
+ private:               \
+  friend Singleton<T>;  \
+  T() = default;
 #endif //CMAKE_LEARN_SRC_DESIGN_SINGLETON_H_
