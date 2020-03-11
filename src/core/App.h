@@ -14,7 +14,7 @@ class App{
   int width_;
   int height_;
   int fps_;
-  char *title_;
+  const char *title_;
  private:
   //---------------回调方法-----------------
   /**
@@ -31,16 +31,19 @@ class App{
    */
   void setup_callbacks();
  public:
-  GLFWwindow *Window();
-  int Width() const;
-  int Height() const;
-  int Fps() const;
-  char *Title() const;
+  //---------------getter setter------------------
+  GLFWwindow *window();
+  int width() const;
+  int height() const;
+  int fps() const;
+  const char *title() const;
 
  public:
-    bool Init(char* title, int width, int height);
+    bool Init(const char* title, int width, int height);
     void Run();
     void Update();
 };
-typedef Singleton<App> AppInstance;
+
+//创建单例
+SINGLETON(App)
 #endif //CMAKE_LEARN_APP_H

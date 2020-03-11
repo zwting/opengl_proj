@@ -22,4 +22,6 @@ class Singleton {
 
 };
 template <class T> T* Singleton<T>::instance_ = nullptr;
+
+#define SINGLETON(T) typedef Singleton<T> T##Instance;
 #endif //CMAKE_LEARN_SRC_DESIGN_SINGLETON_H_

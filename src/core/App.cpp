@@ -6,22 +6,22 @@
 #include <glad/glad.h>
 #include "App.h"
 
-int App::Width() const {
+int App::width() const {
     return width_;
 }
-int App::Height() const {
+int App::height() const {
     return height_;
 }
-int App::Fps() const {
+int App::fps() const {
     return fps_;
 }
-char *App::Title() const {
+const char *App::title() const {
     return title_;
 }
-GLFWwindow *App::Window() {
+GLFWwindow *App::window() {
     return window_;
 }
-bool App::Init(char *title, int width, int height) {
+bool App::Init(const char *title, int width, int height) {
     title_ = title;
     width_ = width;
     height_ = height;
