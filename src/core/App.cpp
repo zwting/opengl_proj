@@ -4,6 +4,7 @@
 
 #include <cstdio>
 #include <glad/glad.h>
+#include <utils/Debug.h>
 #include "App.h"
 
 int App::width() const {

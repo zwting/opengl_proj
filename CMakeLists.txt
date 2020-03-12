@@ -10,7 +10,9 @@ set(SOURCES
         src/core/App.cpp
         src/core/Time.cpp
         src/core/Input.cpp
-        src/constant/KeyCode.h)
+        src/constant/KeyCode.h
+        src/utils/Debug.cpp
+        )
 
 # Executable definition and properties
 add_executable(${PROJECT_NAME} ${SOURCES})
