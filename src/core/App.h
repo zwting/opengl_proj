@@ -52,6 +52,7 @@ class App : public Singleton<App> {
  protected:
   //=======================内部方法=======================
   void Update();
+  void Render();
 };
 
 //创建单例

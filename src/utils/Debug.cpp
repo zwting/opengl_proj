@@ -6,11 +6,3 @@
 #include <cstdio>
 #include <cstdarg>
 
-
-void Debug::LogWarning(const char *msg, ...) {
-
-}
-void Debug::LogError(const char *msg, ...) {
-
-}
-

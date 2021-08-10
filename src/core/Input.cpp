@@ -5,6 +5,7 @@
 #include <constant/KeyCode.h>
 #include "Input.h"
 #include <glfw/glfw3.h>
+#include <cassert>
 
 bool Input::GetKey(KeyCode key) {
     assert(App::instance()->init_complete());

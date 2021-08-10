@@ -76,6 +76,7 @@ void App::Run() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         Update();
+        Render();
 
         glfwSwapBuffers(window_);
         glfwPollEvents();
@@ -85,7 +86,13 @@ void App::Run() {
     glfwTerminate();
 }
 void App::Update() {
+    Debug::instance()->Log("hello world");
 
+}
+
+void App::Render()
+{
+	
 }
 int App::init_complete() const {
     return init_complete_;
