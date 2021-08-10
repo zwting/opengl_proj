@@ -51,8 +51,8 @@ class App : public Singleton<App> {
   void Run();
  protected:
   //=======================内部方法=======================
-  void Update();
-  void Render();
+  void Update(const double dt);
+  void Render(const double dt);
 };
 
 //创建单例

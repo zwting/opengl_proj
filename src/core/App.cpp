@@ -6,6 +6,7 @@
 #include <glad/glad.h>
 #include <utils/Debug.h>
 #include "App.h"
+#include "Time.h"
 
 int App::width() const {
     return width_;
@@ -56,6 +57,7 @@ bool App::Init(const char *title, int width, int height) {
         return false;
     }
 
+    Time::instance()->Init();
     init_complete_ = true;
 
     return true;
@@ -75,8 +77,10 @@ void App::Run() {
     while (!glfwWindowShouldClose(window_)) {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        Update();
-        Render();
+        Time::instance()->Update();
+        const double dt = Time::instance()->GetDeltaTime();
+        Update(dt);
+        Render(dt);
 
         glfwSwapBuffers(window_);
         glfwPollEvents();
@@ -85,12 +89,11 @@ void App::Run() {
     glfwDestroyWindow(window_);
     glfwTerminate();
 }
-void App::Update() {
-    Debug::instance()->Log("hello world");
-
+void App::Update(const double dt) 
+{
 }
 
-void App::Render()
+void App::Render(const double dt)
 {
 	
 }
