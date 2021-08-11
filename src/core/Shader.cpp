@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include "Camera.h"
+#include "utils/Debug.h"
 
 const Shader* Shader::CurShader = nullptr;
 
@@ -28,7 +29,7 @@ Shader::Shader(const char* vertexPath, const char* fragPath)
 	}
 	catch (std::ifstream::failure e)
 	{
-		std::cout << "Error: shader file not successfuly read" << std::endl;
+		Debug::instance()->Log("Error: shader file not successfuly read");
 	}
 
 	mVertexID = glCreateShader(GL_VERTEX_SHADER);
@@ -53,7 +54,7 @@ Shader::Shader(const char* vertexPath, const char* fragPath)
 	{
 		memset(mLogBuffer, 0, sizeof(mLogBuffer));
 		glGetProgramInfoLog(mProgram, sizeof(mLogBuffer) / sizeof(char), nullptr, mLogBuffer);
-		std::cout << "Error: Shader program linking failed:\n" << mLogBuffer << std::endl;
+		Debug::instance()->Log("Error: Shader program linking failed:\n {0}", mLogBuffer);
 		return;
 	}
 
@@ -117,7 +118,8 @@ bool Shader::Compile(GLuint shaderID, const char* src)
 	{
 		memset(mLogBuffer, 0, sizeof(mLogBuffer));
 		glGetShaderInfoLog(shaderID, sizeof(mLogBuffer) / sizeof(char), nullptr, mLogBuffer);
-		std::cout << "Error: vertex shader compilation failed:\n" << mLogBuffer << std::endl;
+		char* shaderType = shaderID == mVertexID ? "vertex" : "fragment";
+		Debug::instance()->Log("Error: {0} shader compilation failed:\n {1}", shaderType, mLogBuffer);
 		return false;
 	}
 

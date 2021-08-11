@@ -5,10 +5,17 @@ in vec2 TexCoords;
 in vec3 WorldPos;
 in vec3 Normal;
 
-uniform vec3 camPos;
+uniform vec3 albedo;
 uniform float metallic;
 uniform float roughness;
 uniform float ao;
+
+// lights
+uniform vec3 lightPositions[4];
+uniform vec3 lightColors[4];
+
+uniform vec3 camPos;
+
 
 const int LIGHT_COUNT = 4;
 
@@ -57,13 +64,13 @@ void main()
 	vec3 N = normalize(Normal);
 	vec3 V = normalize(camPos - WorldPos);
 
-	float F0 = vec3(0.04);
+	vec3 F0 = vec3(0.04);
 	F0 = mix(F0, albedo, metallic);
 
 	vec3 Lo = vec3(0.0);
 	for(int i = 0; i < LIGHT_COUNT; ++i)
 	{
-		vec3 lightDir = lightPosition[i] - WorldPos;
+		vec3 lightDir = lightPositions[i] - WorldPos;
 		vec3 L = normalize(lightDir);
 		vec3 H = normalize(L + V);
 
@@ -73,7 +80,7 @@ void main()
 
 		float NDF = DistributionGGX(N, H, roughness);
 		float G = GeometrySmith(N, V, L, roughness);
-		vec3 F = FresnelSchlick(H, V, F0);
+		vec3 F = FresnelSchlick(saturate(dot(H, V)), F0);
 
 		vec3 Ks = F;
 		vec3 Kd = vec3(1.0) - Ks;

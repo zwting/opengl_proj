@@ -6,6 +6,8 @@ project(fancy_engine)
 # Source files
 set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs)
+set(RES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/res)
+
 set(SOURCES
         src/main.cpp
         src/core/App.cpp
@@ -87,12 +89,10 @@ add_subdirectory(${LIB_DIR}/glm)
 # assimp
 add_library(assimp STATIC IMPORTED)
 set_target_properties(assimp PROPERTIES IMPORTED_LOCATION ${LIB_DIR}/assimp/assimp-vc142-mt.lib)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "${LIB_DIR}/assimp/assimp-vc142-mt.dll" $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-        "${LIB_DIR}/assimp/assimp-vc142-mt.dll"
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>)
-
+# copy res to outdir
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${RES_DIR}" $<TARGET_FILE_DIR:${PROJECT_NAME}>/res)
 
 target_include_directories(${PROJECT_NAME} PUBLIC  
     ${GLAD_DIR}/include

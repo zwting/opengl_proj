@@ -26,7 +26,7 @@ private:
 		std::vector<spdlog::sink_ptr> sinks;
 		sinks.push_back(std::make_shared<spdlog::sinks::stdout_sink_st>());
 		sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>("logs/main-log.txt", max_size, max_files));
-		_main_logger = std::make_shared<spdlog::logger>("name", begin(sinks), end(sinks));
+		_main_logger = std::make_shared<spdlog::logger>("MAIN", begin(sinks), end(sinks));
 		//register it if you need to access it globally
 		spdlog::register_logger(_main_logger);
 	}
