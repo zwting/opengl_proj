@@ -25,7 +25,7 @@ public:
         _time_elapsed = glfwGetTime();
     }
 
-    void Update(int fps)
+    void Update()
     {
         const double cur_time = GetTime();
         _delta_time = cur_time - _time_elapsed;

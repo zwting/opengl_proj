@@ -24,8 +24,16 @@ set(SOURCES
         src/core/Node.cpp
         src/core/Time.h
         src/core/Time.cpp
+        src/core/PrimitiveModel.h
+        src/core/PrimitiveModel.cpp
+        src/core/Model.h
+        src/core/Model.cpp
+        src/core/Mesh.h
+        src/core/Mesh.cpp
+        src/core/Time.cpp
         src/utils/CommonUtils.h
         src/utils/CommonUtils.cpp
+        
         )
 
 # Executable definition and properties
@@ -75,15 +83,24 @@ add_dependencies(${PROJECT_NAME} spdlog)
 
 # glm
 add_subdirectory(${LIB_DIR}/glm)
-target_link_libraries(${PROJECT_NAME} glm::glm)
+
+# assimp
+add_library(assimp STATIC IMPORTED)
+set_target_properties(assimp PROPERTIES IMPORTED_LOCATION ${LIB_DIR}/assimp/assimp-vc142-mt.lib)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        "${LIB_DIR}/assimp/assimp-vc142-mt.dll"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
 
 target_include_directories(${PROJECT_NAME} PUBLIC  
     ${GLAD_DIR}/include
     ${LIB_DIR}/stb
     ${LIB_DIR}/spdlog/include/
     ${SRC_DIR}/header
-    ${LIB_DIR}/assimp
+    ${LIB_DIR}/assimp/include/
 )
 
 
-target_link_libraries(${PROJECT_NAME} glad glfw3)
+target_link_libraries(${PROJECT_NAME} assimp glm::glm glad glfw3)

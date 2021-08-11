@@ -19,15 +19,21 @@ Model* PrimitiveModel::GetModel(PrimitiveType type)
 	{
 	case PrimitiveType::Cube:
 		{
-			Model* model = new Model("resources/model/cube.obj");
+			Model* model = new Model("res/model/cube.obj");
 			cachedModel[type] = model;
 			break;
 		}
 	case PrimitiveType::Quad:
 		{
-			Model* model = new Model("resources/model/quad.obj");
+			Model* model = new Model("res/model/quad.obj");
 			cachedModel[type] = model;
 			break;
+		}
+	case PrimitiveType::Sphere:
+		{
+			Model* model = new Model("res/model/sphere.obj");
+			cachedModel[type] = model;
+		break;
 		}
 	default:
 		return cachedModel[PrimitiveType::Cube];

@@ -2,7 +2,7 @@
 #include "assimp/Importer.hpp"
 #include "assimp/postprocess.h"
 #include <iostream>
-#include "CommonUtils.h"
+#include "utils/CommonUtils.h"
 
 void Model::LoadModel(std::string path)
 {
