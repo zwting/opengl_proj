@@ -53,7 +53,9 @@ public:
 protected:
 	//=======================内部方法=======================
 	void Update(const double dt);
+	void RenderGUI(double dt);
 	void Render(const double dt);
+	void ImguiBackendInit(GLFWwindow* window, const char* glsl_version);
 	void InitLogicTmp();
 };
 

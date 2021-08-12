@@ -35,7 +35,8 @@ set(SOURCES
         src/core/Time.cpp
         src/utils/CommonUtils.h
         src/utils/CommonUtils.cpp
-        
+        ${LIB_DIR}/imgui/backends/imgui_impl_opengl3.cpp
+        ${LIB_DIR}/imgui/backends/imgui_impl_glfw.cpp
         )
 
 # Executable definition and properties
@@ -91,6 +92,20 @@ add_library(assimp STATIC IMPORTED)
 set_target_properties(assimp PROPERTIES IMPORTED_LOCATION ${LIB_DIR}/assimp/assimp-vc142-mt.lib)
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "${LIB_DIR}/assimp/assimp-vc142-mt.dll" $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
+# imgui
+add_library(imgui SHARED  
+        ${LIB_DIR}/imgui/imgui.cpp
+        ${LIB_DIR}/imgui/imgui_demo.cpp
+        ${LIB_DIR}/imgui/imgui_draw.cpp
+        ${LIB_DIR}/imgui/imgui_tables.cpp
+        ${LIB_DIR}/imgui/imgui_tables.cpp
+        ${LIB_DIR}/imgui/imgui_widgets.cpp
+        ${LIB_DIR}/imgui/imgui_widgets.cpp
+)
+target_include_directories(imgui PRIVATE 
+        ${LIB_DIR}/imgui
+)
+
 # copy res to outdir
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${RES_DIR}" $<TARGET_FILE_DIR:${PROJECT_NAME}>/res)
 
@@ -100,7 +115,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${LIB_DIR}/spdlog/include/
     ${SRC_DIR}/header
     ${LIB_DIR}/assimp/include/
+    ${LIB_DIR}/imgui/
 )
 
 
-target_link_libraries(${PROJECT_NAME} assimp glm::glm glad glfw3)
+target_link_libraries(${PROJECT_NAME} imgui assimp glm::glm glad glfw3)
