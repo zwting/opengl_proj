@@ -101,6 +101,7 @@ void Shader::Use() const
 	{
 		SetMat4vf("proj",VALUE_PTR(Camera::GetCurrent()->GetProjMatrix()));
 		SetMat4vf("view",VALUE_PTR(Camera::GetCurrent()->GetViewMatrix()));
+		SetVec3("camera_pos", Camera::GetCurrent()->GetPosition());
 	}
 	Shader::CurShader = this;
 }

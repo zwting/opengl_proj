@@ -33,7 +33,16 @@ void Node::CalcModelMatrix()
 	mModelMatrix *= matRot;
 	mModelMatrix = glm::scale(mModelMatrix, mScale);
 
-	mIsTransformDirty = false;
+}
+
+void Node::CalcModelMatrixInv()
+{
+	CommonUtils::IdentityMat(mModelMatrixInv);
+
+	const glm::vec3 scaleInv(1.0 / mScale.x, 1.0 / mScale.y, 1.0 / mScale.z);
+	mModelMatrixInv = glm::scale(mModelMatrixInv, scaleInv);
+	mModelMatrixInv *= glm::toMat4(inverse(mRotation));
+	mModelMatrixInv = glm::translate(mModelMatrixInv, -mPosition);
 }
 
 void Node::Rotate(const quaternion& q)

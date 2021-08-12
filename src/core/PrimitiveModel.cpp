@@ -35,6 +35,12 @@ Model* PrimitiveModel::GetModel(PrimitiveType type)
 			cachedModel[type] = model;
 		break;
 		}
+	case PrimitiveType::Monkey:
+		{
+			Model* model = new Model("res/model/houtou.obj");
+			cachedModel[type] = model;
+			break;
+		}
 	default:
 		return cachedModel[PrimitiveType::Cube];
 	}

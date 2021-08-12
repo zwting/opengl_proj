@@ -14,7 +14,7 @@ uniform float ao;
 uniform vec3 lightPositions[4];
 uniform vec3 lightColors[4];
 
-uniform vec3 camPos;
+uniform vec3 camera_pos;
 
 
 const int LIGHT_COUNT = 4;
@@ -62,7 +62,7 @@ void main()
 {
 
 	vec3 N = normalize(Normal);
-	vec3 V = normalize(camPos - WorldPos);
+	vec3 V = normalize(camera_pos - WorldPos);
 
 	vec3 F0 = vec3(0.04);
 	F0 = mix(F0, albedo, metallic);
@@ -88,7 +88,7 @@ void main()
 
 		vec3 numerator = NDF * G * F;
 		float denominator = 4.0 * saturate(dot(N, V)) * saturate(dot(N, L));
-		vec3 specular = numerator / denominator;
+		vec3 specular = numerator / max(denominator, 0.0001);
 
 		float NdotL = saturate(dot(N, L));
 		Lo += (Kd * albedo / PI + specular) * radiance * NdotL;

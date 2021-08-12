@@ -11,6 +11,7 @@ public:
 		Cube, //立方体
 		Quad, //面片
 		Sphere, // 球体
+		Monkey, //猴头
 	};
 public:
 	static Node* CreatePrimitive(const PrimitiveType type);

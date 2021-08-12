@@ -15,8 +15,9 @@ private:
 
 private:
 	bool mIsTransformDirty{};
-
+	bool mIsModelMatrixInvDirty = false;
 	mat4x4 mModelMatrix{};
+	mat4x4 mModelMatrixInv{};
 
 	Model* mpModel;
 public:
@@ -36,6 +37,12 @@ public:
 		this->mScale = scale;
 	}
 
+	void SetScale(const float scale)
+	{
+		mIsTransformDirty = true;
+		this->mScale = VEC3_ONE * scale;
+	}
+
 	Model* GetModel() const
 	{
 		return mpModel;
@@ -51,8 +58,21 @@ public:
 		if(mIsTransformDirty)
 		{
 			CalcModelMatrix();
+			mIsTransformDirty = false;
+			mIsModelMatrixInvDirty = true;
 		}
 		return this->mModelMatrix;
+	}
+
+	const mat4x4& GetModelMatrixInv()
+	{
+		if (mIsModelMatrixInvDirty)
+		{
+			CalcModelMatrixInv();
+			mIsModelMatrixInvDirty = false;
+		}
+		return this->mModelMatrixInv;
+
 	}
 
 	quaternion GetRotation() const
@@ -134,6 +154,7 @@ public:
 	{
 		mModelMatrix = MAT_IDENTITY;
 		mIsTransformDirty = true;
+		mIsModelMatrixInvDirty = true;
 		mDirtyCallback = nullptr;
 		mScale = VEC3_ONE;
 
@@ -145,6 +166,7 @@ public:
 
 
 	void CalcModelMatrix();
+	void CalcModelMatrixInv();
 
 	void Rotate(const quaternion& q);
 
@@ -154,7 +176,8 @@ public:
 	{
 		if(mpModel)
 		{
-			shader->SetMat4vf("model",VALUE_PTR(GetModelMatrix()));
+			shader->SetMat4vf("model", glm::value_ptr(GetModelMatrix()));
+			shader->SetMat4vf("model_inv", glm::value_ptr(GetModelMatrixInv()));
 			mpModel->Render(shader);
 		}
 	}
