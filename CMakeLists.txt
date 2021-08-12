@@ -93,7 +93,7 @@ set_target_properties(assimp PROPERTIES IMPORTED_LOCATION ${LIB_DIR}/assimp/assi
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "${LIB_DIR}/assimp/assimp-vc142-mt.dll" $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
 # imgui
-add_library(imgui SHARED  
+add_library(imgui STATIC  
         ${LIB_DIR}/imgui/imgui.cpp
         ${LIB_DIR}/imgui/imgui_demo.cpp
         ${LIB_DIR}/imgui/imgui_draw.cpp
