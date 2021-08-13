@@ -19,7 +19,7 @@
 
 Shader* g_shader = nullptr;
 Model* g_model = nullptr;
-Node* g_node = nullptr;
+Transform* g_node = nullptr;
 Camera* g_camera = nullptr;
 
 

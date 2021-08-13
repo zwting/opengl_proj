@@ -4,7 +4,7 @@
 #include "utils/CommonUtils.h"
 #include <functional>
 
-class Node
+class Transform
 {
 public:
 private:
@@ -147,7 +147,7 @@ private:
 	void CheckIsDirty() const;
 
 public:
-	Node(vec3 pos, quaternion rot)
+	Transform(vec3 pos, quaternion rot)
 		:
 		mRotation(rot),
 		mPosition(pos)
@@ -162,7 +162,7 @@ public:
 		CheckIsDirty();
 	}
 
-	~Node();
+	~Transform();
 
 
 	void CalcModelMatrix();

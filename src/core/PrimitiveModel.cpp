@@ -2,10 +2,10 @@
 
 std::map<PrimitiveModel::PrimitiveType, Model*> PrimitiveModel::cachedModel;
 
-Node* PrimitiveModel::CreatePrimitive(const PrimitiveType type)
+Transform* PrimitiveModel::CreatePrimitive(const PrimitiveType type)
 {
-	Node* ret = nullptr;
-	ret = new Node(VEC3_ZERO, QUA_IDENTITY);
+	Transform* ret = nullptr;
+	ret = new Transform(VEC3_ZERO, QUA_IDENTITY);
 	ret->SetModel(GetModel(type));
 
 	return ret;

@@ -5,7 +5,7 @@ Camera* Camera::s_Current = nullptr;
 
 Camera::Camera(vec3 pos, vec3 target, float fov, float aspect, float near, float far, vec3 up)
 {
-	this->mNode = new Node(pos, QUA_IDENTITY);
+	this->mNode = new Transform(pos, QUA_IDENTITY);
 	this->mFov = fov;
 	this->mNear = near;
 	this->mFar = far;

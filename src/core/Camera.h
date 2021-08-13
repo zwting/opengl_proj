@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include "MathType.h"
-#include "Node.h"
+#include "Transform.h"
 
 class Camera
 {
 private:
-	Node* mNode;
+	Transform* mNode;
 
 	vec3 mUp;
 	vec3 mTarget;
@@ -29,7 +29,7 @@ public:
 		return s_Current;
 	}
 
-	Node* GetNode() const
+	Transform* GetNode() const
 	{
 		return mNode;
 	}

@@ -1,8 +1,8 @@
-﻿#include "Node.h"
+﻿#include "Transform.h"
 #include "glm/gtx/quaternion.hpp"
 #include "utils/CommonUtils.h"
 
-Node::~Node()
+Transform::~Transform()
 {
 	if (mpModel)
 	{
@@ -11,7 +11,7 @@ Node::~Node()
 	}
 }
 
-void Node::CheckIsDirty() const
+void Transform::CheckIsDirty() const
 {
 	if (!mIsTransformDirty)
 	{
@@ -24,7 +24,7 @@ void Node::CheckIsDirty() const
 	}
 }
 
-void Node::CalcModelMatrix()
+void Transform::CalcModelMatrix()
 {
 	CommonUtils::IdentityMat(mModelMatrix);
 
@@ -35,7 +35,7 @@ void Node::CalcModelMatrix()
 
 }
 
-void Node::CalcModelMatrixInv()
+void Transform::CalcModelMatrixInv()
 {
 	CommonUtils::IdentityMat(mModelMatrixInv);
 
@@ -45,13 +45,13 @@ void Node::CalcModelMatrixInv()
 	mModelMatrixInv = glm::translate(mModelMatrixInv, -mPosition);
 }
 
-void Node::Rotate(const quaternion& q)
+void Transform::Rotate(const quaternion& q)
 {
 	// rotation = glm::normalize(q) * rotation;
 	// calcModelMatrix();
 }
 
-void Node::LookAt(const vec3& target, const vec3& worldUp)
+void Transform::LookAt(const vec3& target, const vec3& worldUp)
 {
 	const vec3 forward = glm::normalize(mPosition - target);
 	//这里不调用normalize就会出现奇怪现象，原因就是 axb = |a|x|b|x sin(alpha)，即使

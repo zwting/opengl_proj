@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Node.h"
+#include "Transform.h"
 #include <iostream>
 #include <map>
 
@@ -14,7 +14,7 @@ public:
 		Monkey, //猴头
 	};
 public:
-	static Node* CreatePrimitive(const PrimitiveType type);
+	static Transform* CreatePrimitive(const PrimitiveType type);
 	static std::map<PrimitiveType, Model*> cachedModel;
 
 private:

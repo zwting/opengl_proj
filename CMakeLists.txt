@@ -22,8 +22,8 @@ set(SOURCES
         src/core/Texture.cpp
         src/core/Camera.h
         src/core/Camera.cpp
-        src/core/Node.h
-        src/core/Node.cpp
+        src/core/Transform.h
+        src/core/Transform.cpp
         src/core/Time.h
         src/core/Time.cpp
         src/core/PrimitiveModel.h
