@@ -8,17 +8,22 @@
 #include <glfw/glfw3.h>
 #include <design/Singleton.h>
 #include "Input.h"
+#include "gui/SceneWindow.h"
 #include <iostream>
 
 class App : public Singleton<App>
 {
 private:
-	GLFWwindow* window_;
-	int width_;
-	int height_;
-	int fps_;
-	const char* title_;
-	int init_complete_;
+	GLFWwindow* mWindow;
+	int mWidth;
+	int mHeight;
+	int mFps;
+	const char* mTitle;
+	int mIsInitFinished;
+	GLuint mFBO;
+	GLuint mTextureColorBuffer;
+	GLuint mRBO;
+	SceneWindow* mSceneWindow;
 private:
 	//=================回调方法==================
 	/**
@@ -26,14 +31,14 @@ private:
 	 * @param error
 	 * @param description
 	 */
-	static void error_callback(int error, const char* description);
+	static void ErrorCallback(int error, const char* description);
 
 private:
 	//=====================内部回调方法======================
 	/**
 	 * 初始化各种回调方法
 	 */
-	void setup_callbacks();
+	void SetupCallbacks();
 private:
 	//======================构造方法=========================
 SINGLETON(App)
@@ -55,8 +60,11 @@ protected:
 	void Update(const double dt);
 	void RenderGUI(double dt);
 	void Render(const double dt);
-	void ImguiBackendInit(GLFWwindow* window, const char* glsl_version);
+	void ImGUIBackendInit(GLFWwindow* window, const char* glsl_version);
 	void InitLogicTmp();
+	void InitFBO();
+	void Clear();
+	void InitWindows();
 };
 
 //创建单例

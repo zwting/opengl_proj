@@ -13,6 +13,17 @@
 #include "spdlog/sinks/stdout_sinks.h"
 #include "design/Singleton.h"
 
+#define DEFINE_LOG_FUNC(FUNC_NAME, LOGGER_METHOD_NAME) \
+template <typename T>	\
+void FUNC_NAME(const T& msg)	\
+{	\
+	_main_logger->LOGGER_METHOD_NAME(msg);	\
+}                                                      \
+template <typename... Args>	\
+void FUNC_NAME(fmt::format_string<Args...> fmt, Args&& ...args)	\
+{	\
+	_main_logger->LOGGER_METHOD_NAME(fmt, args...);	\
+}
 
 class Debug : public Singleton<Debug>
 {
@@ -31,17 +42,8 @@ private:
 		spdlog::register_logger(_main_logger);
 	}
 public:
-	template <typename... Args>
-	void Log(fmt::format_string<Args...> fmt, Args&& ...args)
-	{
-		_main_logger->info(fmt, args...);
-	}
-
-	template <typename T>
-	void Log(const T& msg)
-	{
-		_main_logger->info(msg);
-	}
+	DEFINE_LOG_FUNC(Log, info)
+	DEFINE_LOG_FUNC(Error, error)
 };
 
 #endif //CMAKE_LEARN_SRC_UTILS_DEBUG_H_

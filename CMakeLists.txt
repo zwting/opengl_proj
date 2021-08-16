@@ -37,7 +37,12 @@ set(SOURCES
         src/utils/CommonUtils.cpp
         ${LIB_DIR}/imgui/backends/imgui_impl_opengl3.cpp
         ${LIB_DIR}/imgui/backends/imgui_impl_glfw.cpp
-        )
+        src/gui/BaseWindow.cpp
+        src/gui/BaseWindow.h
+        src/gui/MainWindow.cpp
+        src/gui/MainWindow.h
+        src/gui/WindowMgr.h
+        src/gui/SceneWindow.cpp src/gui/SceneWindow.h)
 
 # Executable definition and properties
 add_executable(${PROJECT_NAME} ${SOURCES})
