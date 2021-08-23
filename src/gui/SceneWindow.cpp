@@ -11,7 +11,11 @@ void SceneWindow::OnWindowGUI(float dt)
 	ImGui::EndChild();
 }
 SceneWindow::SceneWindow()
-	:BaseWindow(static_cast<std::string&&>("GameWindow"),600,600,0,ImVec2(0, 0))
+	:BaseWindow(static_cast<std::string&&>("Scene Window"),600,600,0,ImVec2(0, 0))
 {
 	mFollowParentSize = false;
+}
+EWindowType SceneWindow::GetWindowType()
+{
+	return EWindowType::SceneWindow;
 }

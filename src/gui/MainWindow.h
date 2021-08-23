@@ -13,6 +13,7 @@ class MainWindow: public BaseWindow
  public:
 	MainWindow(int width, int height);
 	void OnWindowGUI(float dt) override;
+	EWindowType GetWindowType() override;
 };
 
 #endif //FANCY_ENGINE_SRC_GUI_MAINWINDOW_H_

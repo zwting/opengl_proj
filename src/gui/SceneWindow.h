@@ -17,6 +17,7 @@ class SceneWindow: public BaseWindow
  public:
 	void SetTextureColor(GLuint textureColor){mTextureColor = textureColor;}
 	SceneWindow();
+	EWindowType GetWindowType() override;
 };
 
 #endif //FANCY_ENGINE_SRC_GUI_SCENEWINDOW_H_

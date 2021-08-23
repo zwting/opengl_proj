@@ -42,7 +42,7 @@ set(SOURCES
         src/gui/MainWindow.cpp
         src/gui/MainWindow.h
         src/gui/WindowMgr.h
-        src/gui/SceneWindow.cpp src/gui/SceneWindow.h)
+        src/gui/SceneWindow.cpp src/gui/SceneWindow.h src/constant/CommonDefine.h src/event/EventMgr.h)
 
 # Executable definition and properties
 add_executable(${PROJECT_NAME} ${SOURCES})

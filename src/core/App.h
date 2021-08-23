@@ -24,6 +24,7 @@ private:
 	GLuint mTextureColorBuffer;
 	GLuint mRBO;
 	SceneWindow* mSceneWindow;
+	bool mIsShowDemoWindow;
 private:
 	//=================回调方法==================
 	/**
@@ -65,6 +66,7 @@ protected:
 	void InitFBO();
 	void Clear();
 	void InitWindows();
+	void DrawMenu();
 };
 
 //创建单例

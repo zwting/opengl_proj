@@ -6,6 +6,7 @@
 #define FANCY_ENGINE_BASEWINDOW_H
 
 #include <string>
+#include <constant/CommonDefine.h>
 #include "imgui.h"
 
 class BaseWindow
@@ -37,8 +38,11 @@ class BaseWindow
 
 	void SetFollowParentSize(bool isFollow) {mFollowParentSize = isFollow;}
 
+
+
  public:
 	virtual void OnGUI(float dt);
+	virtual EWindowType GetWindowType() = 0;
 	BaseWindow(std::string&& title, int width, int height, int flags, ImVec2&& pos=ImVec2(-1, -1));
 
  protected:

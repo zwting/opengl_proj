@@ -12,14 +12,18 @@ MainWindow::MainWindow(int width, int height)
 	mImGuiCond = 0;
 	mWindowFlags = ImGuiWindowFlags_NoTitleBar |
 		ImGuiWindowFlags_NoScrollbar		|
-		ImGuiWindowFlags_NoScrollbar		|
 		ImGuiWindowFlags_NoMove				|
 		ImGuiWindowFlags_NoResize|
 		ImGuiWindowFlags_NoCollapse|
+		ImGuiWindowFlags_MenuBar |
 		ImGuiWindowFlags_NoBackground;
 }
 
 void MainWindow::OnWindowGUI(float dt)
 {
-
 }
+EWindowType MainWindow::GetWindowType()
+{
+	return EWindowType::MainWindow;
+}
+

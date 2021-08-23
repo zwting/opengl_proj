@@ -260,8 +260,11 @@ void App::Update(const double dt)
 
 void App::RenderGUI(const double dt)
 {
-	static bool show_demo_window = true;
-	ImGui::ShowDemoWindow(&show_demo_window);
+	DrawMenu();
+	if(mIsShowDemoWindow)
+	{
+		ImGui::ShowDemoWindow(NULL);
+	}
 }
 
 void App::Render(const double dt)
@@ -340,8 +343,25 @@ void App::Clear()
 }
 void App::InitWindows()
 {
+	mIsShowDemoWindow = false;
 	WindowMgr::instance()->RegisterWindow(new MainWindow(mWidth, mHeight));
 	mSceneWindow = new SceneWindow();
 	mSceneWindow->SetTextureColor(mTextureColorBuffer);
 	WindowMgr::instance()->RegisterWindow(mSceneWindow);
+}
+void App::DrawMenu()
+{
+	if ( ImGui::BeginMainMenuBar())
+	{
+		if(ImGui::BeginMenu("View"))
+		{
+			ImGui::MenuItem("Demo Window", NULL, &mIsShowDemoWindow);
+			bool isShowSceneWindow = mSceneWindow->IsVisible();
+			ImGui::MenuItem("Scene Window", NULL, &isShowSceneWindow);
+			mSceneWindow->SetVisible(isShowSceneWindow);
+			ImGui::MenuItem("Demo Window", NULL, &mIsShowDemoWindow);
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+	}
 }
